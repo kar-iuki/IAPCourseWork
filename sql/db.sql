@@ -1,9 +1,7 @@
 CREATE DATABASE iap;
 
--- Switch to the new database
 USE iap;
 
--- Create the userdetails table
 CREATE TABLE userdetails (
     email VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
