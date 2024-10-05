@@ -2,23 +2,35 @@
 class menus{
     public function main_menu(){
         ?>
-        <div class="topnav">
-            <a href="./">Home</a>
-            <a href="about.php">About Us</a>
-            <a href="">Our Projects</a>
-            <a href="">Our Portfolio</a>
-            <a href="">Contact Us</a>
-            <?php //$this->main_right_menu(); ?>
-        </div>
+        
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="./">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="about.php">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sign In</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="signUp.php">Sign Up</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>  
         <?php
         
     }
-    public function main_right_menu(){
-        ?>
-        <div class="topnav-right">
-            <a href="signUp.php">Sign Up</a>
-            <a href="">Sign In</a>
-    </div>
-    <?php
-    }
+    
 }
