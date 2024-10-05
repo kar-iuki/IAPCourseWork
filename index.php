@@ -11,7 +11,6 @@ $ObjLayouts->heading();
 $ObjMenus->main_menu();
 $ObjHeadings-> main_banner();
 $ObjCont->main_content();
-$ObjCont->main_right_menu();
 $ObjCont->side_bar();
 $ObjLayouts->footer();
 
