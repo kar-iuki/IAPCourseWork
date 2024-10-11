@@ -22,9 +22,11 @@ $ObjHeadings = new headings();
 $ObjCont = new contents();
 $ObjForm= new user_forms();
 $ObjGlob = new fncs();
+$ObjSendMail = new SendMail();
 
 require "includes/constants.php";
 require "includes/dbConnection.php";
+require "lang/en.php";
 
 $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
 
