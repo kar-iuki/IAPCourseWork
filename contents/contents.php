@@ -26,7 +26,7 @@ class contents{
           <div class="h-100 p-5 bg-body-tertiary border rounded-3">
             <h2>Side bar</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi explicabo sequi quas iure reprehenderit earum saepe eaque? Repudiandae praesentium ad voluptatum quos eaque sapiente, accusamus sed nulla ab quam velit.</p>
-            <button class="btn btn-outline-secondary" type="button">Example button</button>
+            <button class="btn btn-outline-secondary" type="button">Home Page</button>
           </div>
         </div>
         
