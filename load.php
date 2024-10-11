@@ -1,7 +1,7 @@
 <?php
 // class auto load
 function classAutoLoad($classname){
-    $directories=["contents","Layout", "menus"];
+    $directories=["contents","Layout", "menus", "forms", "global", "processes"];
 
     foreach($directories AS $directory){
         $filename = dirname(__FILE__).DIRECTORY_SEPARATOR. $directory . DIRECTORY_SEPARATOR. $classname. ".php";
@@ -20,11 +20,17 @@ $ObjMenus = new menus();
 //require_once "contents/headings.php";
 $ObjHeadings = new headings();
 $ObjCont = new contents();
+$ObjForm= new user_forms();
+$ObjGlob = new fncs();
 
 require "includes/constants.php";
 require "includes/dbConnection.php";
 
 $conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
+
+    $ObjAuth = new auth();
+    $ObjAuth->signup($conn, $ObjGlob, $ObjSendMail, $lang, $conf);
+    $ObjAuth->verify_code($conn, $ObjGlob, $ObjSendMail, $lang, $conf);
 
 
 
