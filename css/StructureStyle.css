@@ -29,8 +29,9 @@ body{
 
 
 .footer{
-    background-color: black;
+    background-color: white;
+    border-top: 20px;
     padding: 20px;
     text-align: center;
-    color: azure;
+    color: black;
 }
