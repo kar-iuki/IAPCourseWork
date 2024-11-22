@@ -33,6 +33,7 @@ class user_forms{
               </form>
           </div>
         </div>
+        
 <?php
     }
     public function verify_code_form($ObjGlob){
