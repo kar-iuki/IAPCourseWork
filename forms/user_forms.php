@@ -73,12 +73,12 @@ class user_forms{
             <form action="<?php print basename($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="passphrase" class="form-label">Enter your password:</label>
-                    <input type="password" name="passphrase" class="form-control form-control-lg" id="passphrase" placeholder="Enter your verification code" <?php print (isset($_SESSION["passphrase"])) ? 'value="'.$_SESSION["passphrase"].'"'  : ''; unset($_SESSION["passphrase"]); ?> >
+                    <input type="password" name="passphrase" class="form-control form-control-lg" id="passphrase" placeholder="Enter your password" <?php print (isset($_SESSION["passphrase"])) ? 'value="'.$_SESSION["passphrase"].'"'  : ''; unset($_SESSION["passphrase"]); ?> >
                     <?php print (isset($err['pass_length_err'])) ? "<span class='invalid'>" . $err['pass_length_err'] . "</span>" : '' ; ?>
                   </div>
                   <div class="mb-3">
                     <label for="conf_passphrase" class="form-label">Confirm your password:</label>
-                    <input type="password" name="conf_passphrase" class="form-control form-control-lg" id="conf_passphrase" placeholder="Enter your verification code" <?php print (isset($_SESSION["conf_passphrase"])) ? 'value="'.$_SESSION["conf_passphrase"].'"'  : ''; unset($_SESSION["conf_passphrase"]); ?> >
+                    <input type="password" name="conf_passphrase" class="form-control form-control-lg" id="conf_passphrase" placeholder="Enter your password" <?php print (isset($_SESSION["conf_passphrase"])) ? 'value="'.$_SESSION["conf_passphrase"].'"'  : ''; unset($_SESSION["conf_passphrase"]); ?> >
                     <?php print (isset($err['conf_pass_err'])) ? "<span class='invalid'>" . $err['conf_pass_err'] . "</span>" : '' ; ?>
                 </div>
                 <button type="submit" name="set_pass" class="btn btn-primary">Save Password</button>
@@ -127,15 +127,11 @@ class user_forms{
             ?>
             <form action="<?php print basename($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
               <div class="mb-3">
-                <label for="genderId" class="form-label">Gender:</label>
-                <select name="genderId" id="genderId" class="form-control form-control-lg" required>
+                <label for="DOB" class="form-label">Gender:</label>
+                <select name="dob" id="dob" class="form-control form-control-lg" required>
                   <option value="">--Select Gender--</option>
-                  <?php
-                    $spot_gender_rows = $conn->select_while("SELECT * FROM gender");
-                    foreach($spot_gender_rows AS $spot_gender_values){
-                      ?>
-                    <option value="<?php print $spot_gender_values["genderId"]; ?>"><?php print $spot_gender_values["gender"]; ?></option>
-                    <?php } ?>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
                   </select>
                   <?php print (isset($err['invalid_selection'])) ? "<span class='invalid'>" . $err['invalid_selection'] . "</span>" : '' ; ?>
                 </div>
@@ -143,14 +139,9 @@ class user_forms{
                   <label for="roleId" class="form-label">Role:</label>
                   <select name="roleId" id="roleId" class="form-control form-control-lg"  required>
                     <option value="">--Select Role--</option>
-                    <?php
-                        $spot_role_rows = $conn->select_while("SELECT * FROM roles");
-                        foreach($spot_role_rows AS $spot_role_values){
-                          if($spot_role_values["roleId"] == 1) { continue; }
-                          ?>
-                        <option value="<?php print $spot_role_values["roleId"]; ?>"><?php print $spot_role_values["role"]; ?></option>
-                        <?php } ?>
-                      </select>
+                    <option value="student">Student</option>
+                    <option value="lecturer">Lecturer</option>
+                    </select>
                       <?php print (isset($err['invalid_selection'])) ? "<span class='invalid'>" . $err['invalid_selection'] . "</span>" : '' ; ?>
                     </div>
                     <button type="submit" name="save_details" class="btn btn-primary">Save Details</button>
@@ -190,37 +181,6 @@ $spot_profile = $conn->select(sprintf("SELECT `users`.`userId`, `users`.`fullnam
                     <input type="text" name="username" class="form-control form-control-lg" maxlength="50" id="username" placeholder="Enter your username" value="<?php print $spot_profile["username"]; ?>" >
                     <?php print (isset($err['usernameExists_err'])) ? "<span class='invalid'>" . $err['usernameExists_err'] . "</span>" : '' ; ?>
                     <?php print (isset($err['usernameLetters_err'])) ? "<span class='invalid'>" . $err['usernameLetters_err'] . "</span>" : '' ; ?>
-                </div>
-              <div class="mb-3">
-                <label for="genderId" class="form-label">Gender:</label>
-                <select name="genderId" id="genderId" class="form-control form-control-lg" required>
-                  <option value="<?php print $spot_profile["genderId"]; ?>"><?php print $spot_profile["gender"]; ?></option>
-                  <?php
-                    $spot_gender_rows = $conn->select_while("SELECT * FROM gender");
-                    foreach($spot_gender_rows AS $spot_gender_values){
-                      if($spot_gender_values["genderId"] == $spot_profile["genderId"]){continue;}
-                      ?>
-                    <option value="<?php print $spot_gender_values["genderId"]; ?>"><?php print $spot_gender_values["gender"]; ?></option>
-                    <?php } ?>
-                  </select>
-                  <?php print (isset($err['invalid_selection'])) ? "<span class='invalid'>" . $err['invalid_selection'] . "</span>" : '' ; ?>
-                </div>
-                <div class="mb-3">
-                  <label for="roleId" class="form-label">Role:</label>
-                  <select name="roleId" id="roleId" class="form-control form-control-lg"  required>
-                  <option value="<?php print $spot_profile["roleId"]; ?>"><?php print $spot_profile["role"]; ?></option>
-                    <?php
-                        $spot_role_rows = $conn->select_while("SELECT * FROM roles");
-                        foreach($spot_role_rows AS $spot_role_values){
-                          if($spot_role_values["roleId"] == 1 || $spot_role_values["roleId"] == $spot_profile["roleId"]) { continue; }
-                          ?>
-                        <option value="<?php print $spot_role_values["roleId"]; ?>"><?php print $spot_role_values["role"]; ?></option>
-                        <?php } ?>
-                      </select>
-                      <?php print (isset($err['invalid_selection'])) ? "<span class='invalid'>" . $err['invalid_selection'] . "</span>" : '' ; ?>
-                    </div>
-                    <button type="submit" name="update_profile" class="btn btn-primary">Update Profile</button>
-                  </form>
                 </div>
               </div>
     <?php
